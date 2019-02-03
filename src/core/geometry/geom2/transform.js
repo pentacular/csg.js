@@ -1,7 +1,5 @@
+const clone = require('./clone')
 const mat4 = require('../../math/mat4')
-const vec2 = require('../../math/vec2')
-const fromSides = require('./fromSides')
-const flip = require('./flip')
 
 /** Performs a lazy transform.
  * @param {Mat4} matrix
@@ -10,7 +8,7 @@ const flip = require('./flip')
  */
 
 const transform = (matrix, geometry) => {
-  let transformed = geometry.clone();
+  let transformed = clone(geometry)
   transformed.matrix = mat4.multiply(geometry.matrix, matrix);
   return transformed;
 }
