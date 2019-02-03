@@ -1,6 +1,7 @@
 const mat4 = require('../../math/mat4')
 const { clamp } = require('../../math/utils')
 const poly3 = require('../poly3')
+const project = require('./project')
 const fromPoints = require('./fromPoints')
 const toPoints = require('./toPoints')
 const toPlanePolygons = require('./toPlanePolygons')
@@ -56,6 +57,7 @@ const extrudeRotate = (params, baseShape) => {
   // maximum distance per axis between two points before considering them to be the same
   const overlapTolerance = 0.00001
   // convert baseshape to just an array of points, easier to deal with
+  baseShape = project(baseShape)
   let shapePoints = toPoints(baseShape)
 
   // determine if the extrudeRotate can be computed in the first place

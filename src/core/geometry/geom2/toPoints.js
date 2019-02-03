@@ -1,3 +1,4 @@
+const project = require('./project')
 
 /**
  * Convert a geom2 to a list of points.
@@ -7,7 +8,7 @@
  */
 const toPoints = input => {
   if ('sides' in input) { // this is a geom2
-    return input.sides.map(side => [side[0][0], side[0][1], side[1][0], side[1][1]])
+    return project(input).sides.map(side => [side[0][0], side[0][1], side[1][0], side[1][1]])
   } else if ('points' in input) {
     return input.points.map(p => ([p.x, p.y]))
   }

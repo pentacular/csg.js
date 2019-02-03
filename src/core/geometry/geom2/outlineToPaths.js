@@ -1,5 +1,6 @@
 const Path2D = require('../core/math/Path2')
 const canonicalize = require('./canonicalize')
+const project = require('./project')
 const vec2 = require('../../math/vec2')
 
 const direction = () => {
@@ -12,7 +13,7 @@ const direction = () => {
  * @returns {Array} array of paths
  */
 const outlineToPaths = shape => {
-  let cleanShape = canonicalize(shape)
+  let cleanShape = canonicalize(project(shape))
   let sideTagToSideMap = {}
   let startVertexTagToSideTagMap = {}
   cleanShape.sides.map(side => {

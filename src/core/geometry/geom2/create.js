@@ -1,3 +1,4 @@
+const mat4 = require('../../math/mat4')
 
 /**
  * @typedef {Object} Geom2 - 2d geometry
@@ -18,6 +19,7 @@
 const create = () => {
   return {
     sides: [],
+    matrix: mat4.identity(),
     isCanonicalized: false
   }
 }

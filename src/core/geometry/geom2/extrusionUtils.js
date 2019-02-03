@@ -3,6 +3,7 @@ const OrthoNormalBasis = require('../../math/OrthoNormalBasis')
 const { parseOptionAs3DVector, parseOptionAsBool, parseOptionAsFloat, parseOptionAsInt } = require('../../../api/optionParsers')
 const { Connector } = require('../../connector/connectors')
 const fromPolygons = require('../geom3/fromPolygons')
+const project = require('./project')
 
 const poly3 = require('../poly3')
 
@@ -18,7 +19,8 @@ const poly3 = require('../poly3')
  * @param  {Object} [options] - options for construction
  * @param {Boolean} [options.symmetrical=true] - extrude symmetrically in two directions about the plane
  */
-const extrudeInOrthonormalBasis = (geometry, orthonormalbasis, depth, options) => {
+const extrudeInOrthonormalBasis = (baseGeometry, orthonormalbasis, depth, options) => {
+  const geometry = project(baseGeometry)
   // first extrude in the regular Z plane:
   if (!(orthonormalbasis instanceof OrthoNormalBasis)) {
     throw new Error('extrudeInPlane: the first parameter should be a OrthoNormalBasis')
@@ -45,7 +47,8 @@ const extrudeInOrthonormalBasis = (geometry, orthonormalbasis, depth, options) =
 * @param  {Object} [options] - options for construction
 * @param {Boolean} [options.symmetrical=true] - extrude symmetrically in two directions about the plane
 */
-const extrudeInPlane = (geometry, axis1, axis2, depth, options) => {
+const extrudeInPlane = (baseGeometry, axis1, axis2, depth, options) => {
+  const geometry = project(baseGeometry)
   return extrudeInOrthonormalBasis(geometry, OrthoNormalBasis.GetCartesian(axis1, axis2), depth, options)
 }
 

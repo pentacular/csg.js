@@ -39,19 +39,19 @@ const unionSub =  (otherGeom3, csg, doRetesselate, doCanonicalize) => {
  * @param  {} shapes
  * @returns {Shape2} a single 2d shape, with default transforms (identity matrix)
  */
-const union = shapes => {
+const union = geometries => {
   // apply the transforms of the shapes to their geometries
-  let _shapes = shapes.map(shape => transformGeometry(shape.transforms, shape))
-  _shapes[0] = retessellate(toShape3Wall(_shapes[0], -1, 1))
+  let _geometries = geometries.map(project)
+  _geometries[0] = retessellate(toShape3Wall(_geometries[0], -1, 1))
 
   let i
   // combine csg pairs in a way that forms a balanced binary tree pattern
   for (i = 1; i < _shapes.length; i += 2) {
-    const current = retessellate(toShape3Wall(_shapes[i], -1, 1))
-    const previous = _shapes[i - 1]
-    _shapes.push(unionSub(previous, current, false, false))
+    const current = retessellate(toShape3Wall(_geometries[i], -1, 1))
+    const previous = _geometries[i - 1]
+    _geometries.push(unionSub(previous, current, false, false))
   }
-  return canonicalize(fromFakeShape3(_shapes[i - 1]))
+  return canonicalize(fromFakeShape3(_geometries[i - 1]))
 }
 
 module.exports = union

@@ -1,3 +1,4 @@
+const project = require('./project')
 
 const c1 = (p0, p1, p2) => (p1[1] > p0[1]) !== (p2[1] > p0[1])
 const c2 = (p0, p1, p2) => (p0[0] < (p2[0] - p1[0]) * (p0[1] - p1[1]) / (p2[1] - p1[1]) + p1[0])
@@ -12,7 +13,8 @@ const c2 = (p0, p1, p2) => (p0[0] < (p2[0] - p1[0]) * (p0[1] - p1[1]) / (p2[1] -
 * @param {Object} p0 - Vertex2 like object
 * @returns {Boolean}
 */
-const hasPointInside = (shape, p0) => {
+const hasPointInside = (baseShape, p0) => {
+  let shape = project(baseShape);
   let p1 = null
   let p2 = null
   let inside = false

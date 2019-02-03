@@ -1,6 +1,7 @@
 const { EPS } = require('../../constants')
 const FuzzyShape2Factory = require('../FuzzyFactory2d')
 const fromSides = require('./fromSides')
+const project = require('./project')
 const vec2 = require('../../math/vec2')
 
 const shape2FromFuzzyFactory = (factory, sourceShape) => {
@@ -17,7 +18,7 @@ const canonicalize = (shape, options) => {
     return shape
   }
   const factory = new FuzzyShape2Factory()
-  const result = shape2FromFuzzyFactory(factory, shape)
+  const result = shape2FromFuzzyFactory(factory, project(shape))
   console.log('result', result)
   result.isCanonicalized = true
   return result

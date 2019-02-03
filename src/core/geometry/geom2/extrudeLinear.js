@@ -1,6 +1,7 @@
 const { extrude } = require('./extrusionUtils')
 const translate = require('./translate')
 const measureBounds = require('./measureBounds')
+const project = require('./project')
 const vec2 = require('../../math/vec2')
 
 /** linear extrusion of the input 2d geometry
@@ -27,7 +28,7 @@ const extrudeLinear = (params, baseGeom) => {
   }
   const { height, twist, slices, center } = Object.assign({}, defaults, params)
 
-  let output = extrude(baseGeom, { offset: [0, 0, height], twistangle: twist, twiststeps: slices })
+  let output = extrude(project(baseGeom), { offset: [0, 0, height], twistangle: twist, twiststeps: slices })
   if (center === true) {
     const outputBounds = measureBounds(output)
     const offset = vec2.scale(vec2.add(outputBounds[1], outputBounds[0]), -0.5)

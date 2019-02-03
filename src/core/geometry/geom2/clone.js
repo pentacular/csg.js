@@ -8,7 +8,8 @@ const fromSides = require('./fromSides')
 const clone = (sourceGeometry) => {
   const newGeometry = create()
   newGeometry.isCanonicalized = sourceGeometry.isCanonicalized
-  newGeometry.sides = fromSides(sourceGeometry.sides)
+  newGeometry.matrix = sourceGeometry.matrix
+  newGeometry.sides = sourceGeometry.sides;
   return newGeometry
 }
 

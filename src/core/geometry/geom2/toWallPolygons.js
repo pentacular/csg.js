@@ -1,5 +1,6 @@
 const toVec3Pairs = require('./toVec3Pairs')
 const connector = require('../../connector')
+const project = require('./project')
 
 /** given 2 connectors, this returns all polygons of a "wall" between 2
  * copies of the input geometry, positioned in 3d space as "bottom" and
@@ -8,7 +9,8 @@ const connector = require('../../connector')
  * @param  {Object} options
  * @return {Array<Poly3>} array of 3d polygons
  */
-const toWallPolygons = (input, options) => {
+const toWallPolygons = (baseInput, options) => {
+  const input = project(baseInput)
   const defaults = {
     origin: [0, 0, 0],
     normal: [0, 1, 0],
@@ -34,7 +36,7 @@ const toWallPolygons = (input, options) => {
     }
   }
   // target geometry is same as this unless specified
-  let targetGeometry = options.geometry || input
+  let targetGeometry = project(options.geometry || input)
   // we get the transformation matrices between the connectors
   let m1 = connector.transformationBetweenConnectors(thisConnector, toConnector1, false, 0)
   let m2 = connector.transformationBetweenConnectors(thisConnector, toConnector2, false, 0)

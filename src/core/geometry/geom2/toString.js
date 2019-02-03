@@ -1,4 +1,5 @@
-const toString = geometry => {
+const toString = baseGeometry => {
+  const geometry = project(baseGeometry);
   let result = 'Geom2 (' + geometry.sides.length + ' sides):\n'
   geometry.sides.map(side => {
     result += '  ' + side.toString() + '\n'

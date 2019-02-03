@@ -8,9 +8,10 @@ const intersection = (otherCag, geometry) => {
   } else {
     geometries = [geometry]
   }
-  let r = toShape3Wall(otherCag, -1, 1)
+  let r = toShape3Wall(project(otherCag), -1, 1)
+  // reduce?
   geometries.map( geometry => {
-    r = intersectSub(r, toShape3Wall(geometry, -1, 1), false, false)
+    r = intersectSub(r, toShape3Wall(project(geometry), -1, 1), false, false)
   })
   r = retesselate(r)
   r = canonicalize(r)

@@ -2,6 +2,7 @@ const { EPS, angleEPS } = require('../../constants')
 const canonicalize = require('./canonicalize')
 const fromPoints = require('./fromPoints')
 const fromPointsNoCheck = require('./fromPoints')
+const project = require('./project')
 const vec2 = require('../../math/vec2')
 const union = require('./union')
 
@@ -12,7 +13,8 @@ const union = require('./union')
  * @param {Number} params.radius radius of expansion
  * @param {Number} params.resolution quality of output shape
  */
-const expand = (params, geometry) => {
+const expand = (params, baseGeometry) => {
+  let geometry = project(baseGeometry);
   const defaults = {
     resolution: 8
   }

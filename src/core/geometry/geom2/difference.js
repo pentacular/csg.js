@@ -1,4 +1,5 @@
 const canonicalize = require('./canonicalize')
+const project = require('./project')
 const retesselate = require('../geom3/retessellate')
 const toGeom3Wall = require('./toGeom3Wall')
 const fromFakeGeom3 = require('./fromFakeGeom3')
@@ -26,7 +27,8 @@ const subtractSub = require('../geom3/difference').subtractSub
  *      |       |
  *      +-------+
  */
-const difference = shapes => {
+const difference = baseShapes => {
+  const shapes = baseShapes.map(project);
   const [shape, otherShapes] = [shapes[0], ...shapes]
   let result = toGeom3Wall(shape, -1, 1)
   otherShapes.map(shape => {

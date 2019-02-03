@@ -3,6 +3,7 @@ const { defaultResolution3D } = require('../../constants')
 
 const vec3 = require('../../math/vec3')
 const connector = require('../../connector')
+const project = require('./project')
 
 const toPlanePolygons = require('./toPlanePolygons')
 const toWallPolygons = require('./toWallPolygons')
@@ -18,7 +19,8 @@ const fromPolygons = require('../geom3/fromPolygons')
  * @returns {Geom3} the extrude shape, as a Geom3 object
  * @example extruded=geometry.extrude({offset: [0,0,10], twistangle: 360, twiststeps: 100});
 */
-const extrude = (geometry, options) => {
+const extrude = (baseGeometry, options) => {
+  let geometry = project(baseGeometry);
   if (geometry.sides.length === 0) {
     throw new Error('cannot extrude a 2D shape with no edges !!')
   }
