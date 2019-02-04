@@ -1,12 +1,12 @@
 const canonicalize = require('./utils/canonicalize')
-const project = require('./project')
+const transformGeometry = require('./transformGeometry')
 
 /** Convert to compact binary form.
  * See fromCompactBinary.
  * @return {CompactBinary}
  */
 const toCompactBinary = (input) => {
-  let geometry = canonicalize(project(input))
+  let geometry = canonicalize(transformGeometry(input))
   let numsides = geometry.sides.length
   let vertexmap = {}
   let vertices = []

@@ -12,7 +12,7 @@ module.exports = {
   difference: require('./difference'),
   intersection: require('./intersection'),
   transform: require('./transform'),
-  project: require('./project'),
+  transformGeometry: require('./transformGeometry'),
 
   extrudeLinear: require('./extrudeLinear'),
   extrudeRectangular: require('./extrudeRectangular'),

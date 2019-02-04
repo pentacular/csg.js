@@ -2,9 +2,9 @@ const { EPS, angleEPS } = require('../../constants')
 const canonicalize = require('./canonicalize')
 const fromPoints = require('./fromPoints')
 const fromPointsNoCheck = require('./fromPoints')
-const project = require('./project')
-const vec2 = require('../../math/vec2')
+const transformGeometry = require('./transformGeometry')
 const union = require('./union')
+const vec2 = require('../../math/vec2')
 
 /** Expand a Geom2 by the given radius and resolution
  * @typedef  {import('./create').Geom2} Geom2
@@ -14,7 +14,7 @@ const union = require('./union')
  * @param {Number} params.resolution quality of output shape
  */
 const expand = (params, baseGeometry) => {
-  let geometry = project(baseGeometry);
+  let geometry = transformGeometry(baseGeometry);
   const defaults = {
     resolution: 8
   }

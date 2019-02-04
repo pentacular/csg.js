@@ -8,8 +8,8 @@ const mat4 = require('../../math/mat4')
  */
 
 const transform = (matrix, geometry) => {
-  let transformed = clone(geometry)
-  transformed.matrix = mat4.multiply(geometry.matrix, matrix);
-  return transformed;
+  let cloned = clone(geometry)
+  cloned.transforms = mat4.multiply(geometry.transforms, matrix);
+  return cloned;
 }
 module.exports = transform

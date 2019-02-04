@@ -1,8 +1,8 @@
-const project = require('./project');
+const transformGeometry = require('./transformGeometry');
 const vec3 = require('../../math/vec3')
 
 const toVec3Pairs = (baseGeometry, matrix) => {
-  const geometry = project(baseGeometry);
+  const geometry = transformGeometry(baseGeometry);
   // convert start,end points of sides to 3d points
   let pairs = geometry.sides.map(side => {
     let p0 = side[0]

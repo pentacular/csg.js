@@ -1,5 +1,5 @@
 const { min, create, max } = require('../../math/vec2')
-const project = require('./project')
+const transformGeometry = require('./transformGeometry')
 
 /** get the bounds of the input 2d geometry
  * @param {Geom2} geometry the geometry to measure
@@ -8,7 +8,7 @@ const project = require('./project')
  * const bounds = measureBounds(rectangle())
  */
 const measureBounds = baseGeometry => {
-  const geometry = project(baseGeometry)
+  const geometry = transformGeometry(baseGeometry)
   let minPoint = geometry.sides.length === 0 ? create() : [geometry.sides[0][0][0], geometry.sides[0][0][1]]
   let maxPoint = minPoint
   geometry.sides.forEach(side => {

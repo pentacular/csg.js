@@ -1,5 +1,5 @@
 const fromPoints = require('./fromPoints')
-const project = require('./project')
+const transformGeometry = require('./transformGeometry')
 
 // from http://www.psychedelicdevelopment.com/grahamscan/
 // see also at https://github.com/bkiers/GrahamScan/blob/master/src/main/cg/GrahamScan.java
@@ -139,7 +139,7 @@ const hull = shapes => {
   let done = []
 
   for (let i = 0; i < shapes.length; i++) { // extract all points of the Shape2 in the argument list
-    let shape2 = project(shapes[i])
+    let shape2 = transformGeometry(shapes[i])
     for (let j = 0; j < shape2.sides.length; j++) {
       const x = shape2.sides[j][0][0]
       const y = shape2.sides[j][0][1]

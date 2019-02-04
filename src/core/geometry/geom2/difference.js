@@ -1,9 +1,9 @@
 const canonicalize = require('./canonicalize')
-const project = require('./project')
-const retesselate = require('../geom3/retessellate')
-const toGeom3Wall = require('./toGeom3Wall')
 const fromFakeGeom3 = require('./fromFakeGeom3')
+const retesselate = require('../geom3/retessellate')
 const subtractSub = require('../geom3/difference').subtractSub
+const transformGeometry = require('./transformGeometry')
+const toGeom3Wall = require('./toGeom3Wall')
 
 // FIXME: double check this algorithm, or even better, swap it out with something not reliant
 // on converting to 3D and back !!!
@@ -28,7 +28,7 @@ const subtractSub = require('../geom3/difference').subtractSub
  *      +-------+
  */
 const difference = baseShapes => {
-  const shapes = baseShapes.map(project);
+  const shapes = baseShapes.map(transformGeometry);
   const [shape, otherShapes] = [shapes[0], ...shapes]
   let result = toGeom3Wall(shape, -1, 1)
   otherShapes.map(shape => {

@@ -1,5 +1,6 @@
-const retesselate = require('./retesselate')
 const canonicalize = require('./canonicalize')
+const retesselate = require('./retesselate')
+const transformGeometry = require('./transformGeometry')
 
 const intersection = (otherCag, geometry) => {
   let geometries
@@ -8,10 +9,10 @@ const intersection = (otherCag, geometry) => {
   } else {
     geometries = [geometry]
   }
-  let r = toShape3Wall(project(otherCag), -1, 1)
+  let r = toShape3Wall(transformGeometry(otherCag), -1, 1)
   // reduce?
   geometries.map( geometry => {
-    r = intersectSub(r, toShape3Wall(project(geometry), -1, 1), false, false)
+    r = intersectSub(r, toShape3Wall(transformGeometry(geometry), -1, 1), false, false)
   })
   r = retesselate(r)
   r = canonicalize(r)

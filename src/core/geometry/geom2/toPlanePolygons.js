@@ -1,7 +1,7 @@
 const vec2 = require('../../math/vec2')
 const vec3 = require('../../math/vec3')
 const measureBounds = require('./measureBounds')
-const project = require('./project')
+const transformGeometry = require('./transformGeometry')
 
 const fromPolygons = require('../geom3/fromPolygons')
 const toGeom3Wall = require('./toGeom3Wall')
@@ -15,7 +15,7 @@ const connector = require('../../connector')
  * @return {Array<Poly3>} polygons
  */
 const toPlanePolygons = (baseGeometry, options) => {
-  const geometry = project(baseGeometry)
+  const geometry = transformGeometry(baseGeometry)
   const defaults = {
     flipped: false,
     origin: [0, 0, 0],

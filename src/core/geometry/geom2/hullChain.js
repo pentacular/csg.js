@@ -1,5 +1,5 @@
 const hull = require('../../shape2/hull')
-const project = require('./project')
+const transformGeometry = require('./transformGeometry')
 const union = require('../../shape2/union')
 
 // FIXME: cleanup, clarify 'closed' parameter
@@ -18,7 +18,7 @@ const chainHull = (params, geometries) => {
     closed: false
   }
   const closed = Object.assign({}, defaults, params)*/
-  let geometries = arguments.map(project)
+  let geometries = arguments.map(transformGeometry)
   let closed = false
   let j = 0
 

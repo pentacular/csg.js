@@ -19,7 +19,7 @@ const mat4 = require('../../math/mat4')
 const create = () => {
   return {
     sides: [],
-    matrix: mat4.identity(),
+    transforms: mat4.identity(),
     isCanonicalized: false
   }
 }
